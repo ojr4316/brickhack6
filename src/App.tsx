@@ -1,19 +1,38 @@
 import React, { Component } from 'react';
 import './App.css';
 import CSS from 'csstype';
+import Post from './Components/Post';
+import Navbar from './Components/Navbar';
 
 export default class App extends Component {
-  render() {
-    return (
-      <div style={style1}>
-        <h1> Paperclip </h1>
+  
 
+  render() {
+    let posts : any = [];
+
+    for (let i = 0; i < 10; i++) {
+      posts.push(<Post title="Calculator" location="Rochester NY" img="https://upload.wikimedia.org/wikipedia/commons/c/cf/Casio_calculator_JS-20WK_in_201901_002.jpg"/>);
+    }
+
+    return (
+      <div style={body}>
+        <Navbar />
+       
+        <div style={postStyle}> 
+          {posts}
+        </div>
       </div>
     );
   }
 }
 
-const style1 : CSS.Properties = {
-  textAlign: "center",
-  backgroundColor: "purple"
+const postStyle : CSS.Properties = {
+  display: "flex",
+  flexWrap: "wrap",
+  justifyContent: "center"
+}
+
+const body : CSS.Properties = {
+  backgroundColor: "#F0F0F0",
+  minHeight: "100vh",
 }

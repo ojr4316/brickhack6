@@ -1,13 +1,48 @@
 import React, { Component } from 'react';
-import '../App.css';
 
-export default class Post extends Component {
+import CSS from 'csstype';
+
+interface Props {
+  title: string,
+  location: string,
+  img: string
+}
+
+interface State {}
+
+export default class Post extends Component<Props, State> {
   render() {
     return (
-      <div style={{border: "1px solid black", borderRadius: "10px", height: "150px", width: "200px"}}>
-        <img style={{height: "60%", width: "80%", margin: "auto"}} alt="object pic" src="https://www.meijer.com/content/dam/meijer/product/0033/31/7198/72/0033317198726_a1c1_1200.png"/>
-        <p style={{margin: "1%"}}>Calculator<p style={{margin: "1%"}}>Location</p></p>
+      <div style={post}>
+        <img style={imgStyle} alt="object pic" src={this.props.img}/>
+        <p style={grayText}>  I'm looking for a... <span style={brightText}> {this.props.title} </span> </p>
+        <p style={grayText}> {this.props.location} </p>
       </div>
     );
   }
+}
+
+const post : CSS.Properties = {
+  border: "2px solid #DE9151", 
+  borderRadius: "10px", 
+  margin: "16px",
+  padding: "16px",
+  width: "300px",
+  height: "250px",
+  textAlign: "center",
+  boxShadow: "5px 5px 5px rgba(0, 0, 0, 0.3), 5px 5px 5px rgba(0, 0, 0, 0.3)"
+}
+
+
+const imgStyle = {
+  width: "200px",
+  height: "200px"
+}
+
+const grayText = {
+  color: "#767696"
+}
+
+const brightText = {
+  color: "#DE9151"
 }

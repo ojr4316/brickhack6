@@ -1,26 +1,23 @@
-import React, { Component, CSSProperties } from 'react';
+import React, { Component } from 'react';
 import CSS from 'csstype';
 
 export default class Navbar extends Component {
   render() {
     return (
       <div style={divStyle}>
-        <table>
-            <td>Paperclip</td>
-            <td>
-                <select>
-                    <option>Profile</option>
-                    <option>Settings</option>
-                    <option>Logout</option>
-                </select>
-            </td>
-        </table>
+        <h1 style={{color: "white"}}> Paperclip </h1>
+       
+        <select>
+            <option>Profile</option>
+            <option>Settings</option>
+            <option>Logout</option>
+        </select>
       </div>
     );
   }
 }
 
-const divStyle: CSSProperties = {
-    backgroundColor: "purple",
+const divStyle: CSS.Properties = {
+    backgroundColor: "#2E2E3A",
     textAlign: "center"
 }
