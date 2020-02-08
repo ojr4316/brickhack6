@@ -3,6 +3,7 @@ import './App.css';
 import CSS from 'csstype';
 import Post from './Components/Post';
 import Navbar from './Components/Navbar';
+import Create from './Components/Create';
 
 export default class App extends Component {
   
@@ -18,6 +19,7 @@ export default class App extends Component {
       <div style={body}>
         <Navbar />
        
+        <Create />
         <div style={postStyle}> 
           {posts}
         </div>
