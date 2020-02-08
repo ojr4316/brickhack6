@@ -1,5 +1,5 @@
 import React, { Component, CSSProperties } from 'react';
-//import './App.css';
+import '../App.css';
 
 export default class Profile extends Component {
   render() {
@@ -11,7 +11,7 @@ export default class Profile extends Component {
             <h3>Name</h3>
             <h5>Location</h5>
         </div>
-        <table style={{border: "black", margin: "auto"}}>Posts</table>
+        <table style={{border: "1px solid black", margin: "auto"}}>Posts</table>
         <button style={{marginLeft: "95%"}}>Add Post</button>
       </div>
     );
