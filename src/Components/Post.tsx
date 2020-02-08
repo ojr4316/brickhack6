@@ -16,18 +16,12 @@ export default class Post extends Component<Props, State> {
     return (
       <div style={post}>
         <img style={imgStyle} alt="object pic" src={this.props.img}/>
-<<<<<<< HEAD
-        <p style={grayText}>  I'm looking for a <span style={brightText}> {this.props.title} </span> </p>
-=======
         <p style={grayText}>  I {this.props.type} a <span style={brightText}> {this.props.title} </span> </p>
->>>>>>> af5b1028adfea2ec9314082f2c75da5445d985ee
         <p style={grayText}> {this.props.location} </p>
       </div>
     );
   }
 }
-
-function typeText(this: any){ (this.props.type === 'want') ? document.documentElement.style.setProperty("--t", "#767696") : document.documentElement.style.setProperty("--b", "#767696"); }
 
 const post : CSS.Properties = {
   border: "2px solid #DE9151", 

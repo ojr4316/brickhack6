@@ -12,7 +12,7 @@ export default class App extends Component {
     let posts : any = [];
 
     for (let i = 0; i < 10; i++) {
-      posts.push(<Post title="Calculator" location="Rochester NY" img="https://upload.wikimedia.org/wikipedia/commons/c/cf/Casio_calculator_JS-20WK_in_201901_002.jpg"/>);
+      posts.push(<Post type="0" title="Calculator" location="Rochester NY" img="https://upload.wikimedia.org/wikipedia/commons/c/cf/Casio_calculator_JS-20WK_in_201901_002.jpg"/>);
     }
 
     return (
