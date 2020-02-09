@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {auth} from 'firebase';
 import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
 
 interface State {
     img: any;
@@ -53,7 +54,8 @@ export default class Settings extends Component {
                     <input type="number" name="phone" onChange={e => this.setState({"phone": e.target.value})} placeholder="Phone Number"/>
                     <br/>
                     <input type="text" name="loc" onChange={e => this.setState({"loc": e.target.value})} placeholder="Location"/>
-                    <input type="submit" value="Save"/>
+                    <br/>
+                    <input type="submit"><Link to='/'>Save</Link></input>
                 </form>
             </div>
         );
