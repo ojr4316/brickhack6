@@ -97,7 +97,7 @@ export default class Home extends Component<Props, State> {
   render() {
 
     if (firebase.auth().currentUser === null) {
-      return <Redirect push to="/login" />;
+      return <Redirect push to="/landing" />;
     }
 
     let p : any = [];
@@ -132,7 +132,7 @@ export default class Home extends Component<Props, State> {
 }
 
 const addButton : CSS.Properties = {
-  position: "absolute",
+  position: "fixed",
   bottom: "16px",
   right: "16px",
   cursor: "pointer",
@@ -146,7 +146,7 @@ const addButton : CSS.Properties = {
 }
 
 const chatButton : CSS.Properties = {
-  position: "absolute",
+  position: "fixed",
   bottom: "0px",
   left: "16px",
   cursor: "pointer",

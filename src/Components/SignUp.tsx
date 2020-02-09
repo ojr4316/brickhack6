@@ -3,6 +3,7 @@ import firebase from 'firebase';
 import {Redirect, Link} from 'react-router-dom';
 import CSS from 'csstype';
 import logo from '../img/icon.png';
+import RubberBand from 'react-reveal/RubberBand';
 
 interface State {
     email: string;
@@ -46,7 +47,7 @@ export default class SignUp extends Component<Props, State> {
 
         return (
             <div style={body}>
-                <img src={logo} style={logoStyle} className="p-3" alt="logo"/>
+                <RubberBand><img src={logo} style={logoStyle} className="p-3" alt="logo"/></RubberBand>
                 <div>
                 <form onSubmit={this.func}>
                     <h1><span style={{color: "#E81C25"}}>Red</span> Paperclip</h1>
