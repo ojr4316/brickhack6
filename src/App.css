@@ -52,14 +52,18 @@ body {
   }
 }
 
-button, input[type=submit] { 
-  border: 2px solid orange;
+button, input[type=submit], .fake-button { 
+  border: 2px solid  #E87F1C;
   outline: none;
   font-size: 1.25em;
   background-color: transparent;
+  color: black;
   padding: 8px 16px;
   border-radius: 8px;
+}
 
+.button-full {
+  background-color: #E87F1C;
 }
 
 input[type=submit] {

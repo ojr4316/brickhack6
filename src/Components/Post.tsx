@@ -91,7 +91,7 @@ const imgStyle : CSS.Properties =  {
 }
 
 const grayText = {
-  color: "var(--t)"
+  color: "#808080"
 }
 
 const brightText = {

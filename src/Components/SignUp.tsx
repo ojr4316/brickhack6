@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import {Redirect, Link} from 'react-router-dom';
+import CSS from 'csstype';
+import logo from '../img/icon.png';
 
 interface State {
     email: string;
@@ -18,7 +20,7 @@ export default class SignUp extends Component<Props, State> {
         this.state = {
             email: "",
             pass: "",
-            msg: "Please enter your email and a password"
+            msg: ""
         }
         firebase.auth().onAuthStateChanged((firebaseUser) => {
             if (firebaseUser) {
@@ -43,18 +45,21 @@ export default class SignUp extends Component<Props, State> {
         }
 
         return (
-            <div>
+            <div style={body}>
+                <img src={logo} style={logoStyle} className="p-3" alt="logo"/>
+                <div>
                 <form onSubmit={this.func}>
-                    <h1>Sign Up</h1>
+                    <h1><span style={{color: "#E81C25"}}>Red</span> Paperclip</h1>
+                    <h3 style={{color: "#808080"}}> Register </h3>
                     <p style={{height: "1em", color: "red"}}>{this.state.msg}</p>
-                    <input type="text" placeholder="E-mail" value={this.state.email} name="email" onChange={this.handleEmail}/>
+                    <input style={inputStyle} className="my-1"type="text" placeholder="E-mail" value={this.state.email} name="email" onChange={this.handleEmail}/>
                     <br/> 
-                    <input type="password" placeholder="Password" name="pass" value={this.state.pass} onChange={this.handlePass}/>
+                    <input style={inputStyle} className="my-1"type="password" placeholder="Password" name="pass" value={this.state.pass} onChange={this.handlePass}/>
                     <br/>
-                    <input type="submit" placeholder="Sign Up"/>
-                    <p>———— or ————</p>
-                    <button><Link to="/login">Login</Link></button>
+                    <input style={{width: "100%", color: "#F0F0F0", backgroundColor: "#E87F1C"}} className="button-full my-2" type="submit" value="Sign Up"/>
                 </form>
+                <button style={{width: "100%", color: "#F0F0F0"}} ><Link style={{color: "black"}} to="/login">Login</Link></button>
+                </div>
             </div>
         );
     }
@@ -66,4 +71,21 @@ export default class SignUp extends Component<Props, State> {
             this.setState({"msg": e.message});
         });
     }
+}
+
+const body : CSS.Properties = {
+    backgroundColor: "#F0F0F0",
+    minHeight: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+};
+  
+const logoStyle : CSS.Properties = {
+    width: "300px",
+    height: "auto"
+}
+
+const inputStyle : CSS.Properties = {
+    fontSize: "1.25em"
 }
