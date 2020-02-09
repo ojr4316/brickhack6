@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import CSS from 'csstype';
 import axios from 'axios';
 import {ButtonGroup, ToggleButton} from 'react-bootstrap';
-
 interface Props {}
 interface State {
-    type: number
+    type: string
     request: string
     description: string
 }
@@ -13,10 +12,11 @@ interface State {
 export default class Create extends Component {
 
     state = {
-        type: 0,
+        type: "0",
         request: "",
         description: "",
-        img: null
+        img: null,
+        visible: false
     }
 
     handleChange = (e) => {
@@ -52,7 +52,7 @@ export default class Create extends Component {
 
   render() {
     return (
-      <div style={greyBg}>
+      <div style={this.state.visible ? greyBg : {display: "none"}}>
         <form onSubmit={this.submit} style={create}>
             <p style={label}> Short Name </p>
             <input style={inputStyle} onChange={this.handleChange} name="request" placeholder="Enter Name Here"/>
@@ -61,10 +61,10 @@ export default class Create extends Component {
             <input style={inputStyle} onChange={this.handleChange} name="description" placeholder="Enter Short Description Here"/>
 
             <ButtonGroup toggle style={{margin: "16px"}}>
-            <ToggleButton type="radio" name="type" defaultChecked value="0">
+            <ToggleButton checked={this.state.type === "0"} style={this.state.type === "0" ? customChecked : normal} type="radio" name="type" value='0' onChange={this.handleChange}>
               Want this item
             </ToggleButton>
-            <ToggleButton type="radio" name="type" value="1">
+            <ToggleButton checked={this.state.type === "1"} style={this.state.type === "1" ? customChecked : normal} type="radio" name="type" value='1' onChange={this.handleChange}>
               Have this item
             </ToggleButton>
           </ButtonGroup>
@@ -107,4 +107,15 @@ const label : CSS.Properties = {
   fontSize: "1.25em",
   padding: 0,
   margin: 0
+}
+
+const customChecked : CSS.Properties = {
+  border: "none",
+  backgroundColor: "green",
+  boxShadow: "none"
+}
+
+const normal : CSS.Properties = {
+  border: "none",
+  boxShadow: "none"
 }

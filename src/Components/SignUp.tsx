@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import CSS from 'csstype';
 import firebase from 'firebase';
+import {Redirect} from 'react-router-dom';
 
 interface State {
     email: string;
     pass: string;
 }
 
-interface Props {}
+interface Props {
+    user: any,
+    setUser: any
+}
 
 export default class SignUp extends Component<Props, State> {
 
@@ -22,25 +25,26 @@ export default class SignUp extends Component<Props, State> {
         measurementId: "G-WRQ0DRJR5G"
       };
     
-    constructor(props){
+    constructor(props: Props){
         super(props);
         this.state = {
             email: "",
             pass: ""
         }
         firebase.initializeApp(this.config);
-        const root = firebase.database().ref().child('react');
+        //const root = firebase.database().ref().child('react');
         firebase.auth().onAuthStateChanged((firebaseUser) => {
-            if (firebaseUser)
+            if (firebaseUser) {
                 console.log(firebaseUser);
-            else
+                this.props.setUser(firebaseUser);
+            } else {
                 console.log('not logged in');
-        })
+            }
+        });
     }
 
     handleEmail = (e) => {
-        this.setState({"email": e.target.value});   
-        console.log(this.state.email); 
+        this.setState({"email": e.target.value});
     }
 
     handlePass = (e) => {
@@ -48,6 +52,11 @@ export default class SignUp extends Component<Props, State> {
     }
 
     render() {
+        if (this.props.user !== null) {
+            return <Redirect push to="/" />;
+        }
+
+
         return (
             <div>
                 <form onSubmit={this.func}>
