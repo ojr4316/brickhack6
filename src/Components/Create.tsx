@@ -34,7 +34,7 @@ export default class Create extends Component<Props, State> {
       reader.readAsDataURL(e.target.files[0]);
     }
         
-    submit = (e) => {
+    submit = (e: any) => {
       e.preventDefault();
       axios.post('http://redpaperclip.online/addRequest.php', {
           wants: this.state.wants,
@@ -42,6 +42,7 @@ export default class Create extends Component<Props, State> {
           description: this.state.description,
           img: this.state.img,
           uid: auth().currentUser?.uid,
+          username: auth().currentUser?.displayName === null ? auth().currentUser?.email : auth().currentUser?.displayName,
           location: this.state.location
         })
         .then((response) => {

@@ -13,7 +13,8 @@ interface Props {
   uid: string,
   description: string,
   selected: number,
-  setSelected: any
+  setSelected: any,
+  username: string
 }
 
 interface State {}
@@ -35,8 +36,8 @@ export default class Post extends Component<Props, State> {
   startChat = () => {
     if (auth().currentUser?.uid !== this.props.uid) {
       axios.post('http://redpaperclip.online/addChat.php', {
-        uidFrom: auth().currentUser?.uid,
-        uidTo: this.props.uid
+        userFrom: auth().currentUser?.displayName === null ? auth().currentUser?.email : auth().currentUser?.displayName,
+        userTo: this.props.username
       })
       .then((response) => {
         console.log(response);

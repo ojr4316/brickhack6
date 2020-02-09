@@ -3,9 +3,13 @@
   margin: 0;
 }
 
+body {
+  overflow-y: auto;
+}
 
 .post-selected {
   position: fixed;
+  top: 20%;
   animation: expand 0.5s forwards;
   z-index: 50;
 }
@@ -13,7 +17,6 @@
 .post-normal {
   animation: shrink 0.4s forwards;
 }
-
 
 @keyframes expand {
   0% {

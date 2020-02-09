@@ -29,6 +29,7 @@ export default class Settings extends Component {
       }
 
     submit = (e) => {
+        e.preventDefault();
         const user = auth().currentUser;
         if (user != null) {
             user.updateProfile({
