@@ -8,7 +8,7 @@ import Landing from './Components/Landing';
 import Profile from './Components/Profile';
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import { User, initializeApp } from 'firebase';
+import { initializeApp } from 'firebase';
 
 interface State {}
 interface Props {}
@@ -30,10 +30,6 @@ export default class App extends Component<Props, State> {
     appId: "1:570120231969:web:da93453502776106129760",
     measurementId: "G-WRQ0DRJR5G"
   };
-
-  setUser = (u: User) => {
-    this.setState({user: u});
-  }
 
   render() {
     return (

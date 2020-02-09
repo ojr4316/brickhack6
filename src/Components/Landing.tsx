@@ -10,7 +10,7 @@ export default class Landing extends Component {
             <div style={page}> 
             <div className="bg-dark" style={{overflow: "hidden", width: "100vw", height: "100vh"}}>
                 <div className="text-center">
-                    <img src={logo} style={img} className='d-inline-block'/>
+                    <img src={logo} alt="logo" style={img} className='d-inline-block'/>
                     <h1 style={h1} className="d-inline-block align-bottom">Paperclip</h1>
                 </div>
                 <h3 style={h2}>Reducing cash dependencies on a college campus near you</h3>

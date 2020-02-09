@@ -1,4 +1,4 @@
-import React, { Component, CSSProperties } from 'react';
+import React, { Component } from 'react';
 import CSS from "csstype";
 import axios from 'axios';
 import {auth} from 'firebase';
@@ -81,9 +81,10 @@ export default class Chat extends Component<Props, State> {
       
     return (
       <Fade bottom>
-      <div style={{display: this.props.visible ? "initial" : "none", position: "absolute", bottom: 0, left: 0}}>
-        <div className="close" onClick={this.props.closeChat}>X</div>
-          <div style={{overflowX: "scroll"}}> 
+      <div style={{display: this.props.visible ? "initial" : "none", position: "absolute", bottom: 0, left: 0, padding: "20px", backgroundColor: "#808080", border: "2px solid #E87F1C"}}>
+        <div className="close ml-2 mt-2" onClick={this.props.closeChat}>X</div>
+          <div style={{overflowX: "scroll", maxWidth: "25vw", overflow: "auto",
+  whiteSpace: "nowrap"}}> 
           {chats}
           </div>
         <div style={chatArea} dangerouslySetInnerHTML={{__html: 
@@ -91,7 +92,7 @@ export default class Chat extends Component<Props, State> {
         
         <form onSubmit={this.sendMessage} style={chatSubmit}>
             <input type="text" ref="chatInput" placeholder="Message here..." style={{width: "100%"}} value={this.state.message} onChange={(e) => this.setState({message: e.target.value})}/>
-            <input type="submit" placeholder="Send" style={{width: "100%"}}/>
+            <input className="mt-2" type="submit" placeholder="Send" style={{width: "100%", color: "white", backgroundColor: "#311847"}}/>
         </form>
 
       </div>
@@ -114,7 +115,7 @@ const chatArea : CSS.Properties = {
 };
 
 const chatButton : CSS.Properties = {
-    backgroundColor: "blue",
+    backgroundColor: "#311847",
     padding: "8px 16px",
     margin: "8px",
     cursor: "pointer",

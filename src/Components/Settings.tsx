@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {auth} from 'firebase';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
+import CustomNavbar from './CustomNavbar';
+import CSS from 'csstype';
 
 interface State {
     img: any;
@@ -45,16 +47,29 @@ export default class Settings extends Component {
         return <Redirect push to="/login" />
         return(
             <div>
+            <CustomNavbar />
+            <div style={body}>
+                
                 <form onSubmit={this.submit}>
-                    <input ref="imageUpload" name="img" type="file" accept="image/*" onChange={this.upload}/>
+                <h1> Settings </h1>
+                    <input className="my-2" ref="imageUpload" name="img" type="file" accept="image/*" onChange={this.upload}/>
                     <br/>
-                    <input type="text" name="name" onChange={e => this.setState({"name": e.target.value})} placeholder="Display Name" value={this.state.name !== null ? this.state.name : ''}/>
+                    <input className="my-2" type="text" name="name" onChange={e => this.setState({"name": e.target.value})} placeholder="Display Name" value={this.state.name !== null ? this.state.name : ''}/>
                     <br/>
-                    <input type="number" name="phone" onChange={e => this.setState({"phone": e.target.value})} placeholder="Phone Number" value={this.state.phone !== null ? this.state.phone : ''}/>
+                    <input className="my-2" type="number" name="phone" onChange={e => this.setState({"phone": e.target.value})} placeholder="Phone Number" value={this.state.phone !== null ? this.state.phone : ''}/>
                     <br/>
                     <button type="submit"><Link to='/'>Save</Link></button>
                 </form>
             </div>
+            </div>
         );
     }
 }
+
+const body : CSS.Properties = {
+    backgroundColor: "#F0F0F0",
+    minHeight: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  }

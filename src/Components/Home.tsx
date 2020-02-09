@@ -118,11 +118,11 @@ export default class Home extends Component<Props, State> {
         </div>
 
         <div style={addButton} onClick={this.toggleCreate}>
-          <p style={{color: "white", margin: "-8px", fontSize: "3em"}}> + </p>
+          <p style={{color: "white", margin: "4px", fontSize: "3em"}}> + </p>
         </div>
 
         <div onClick={this.toggleChat} style={{...chatButton, ...{ display: (this.state.page === 2 ? "none" : "initial") } }}>
-          <p style={{color: "white", margin: "-8px", fontSize: "3em"}}> C </p>
+          <p style={{color: "white", margin: "4px", fontSize: "3em"}}> C </p>
         </div>
 
 
@@ -147,13 +147,13 @@ const addButton : CSS.Properties = {
 
 const chatButton : CSS.Properties = {
   position: "absolute",
-  bottom: "16px",
+  bottom: "0px",
   left: "16px",
   cursor: "pointer",
-  backgroundColor: "blue",
-  width: "64px",
+  backgroundColor: "#311847",
+  width: "128px",
   height: "64px",
-  borderRadius: "100%",
+  borderRadius: "10px 10px 0px 0px",
   textAlign: "center",
   verticalAlign: "center",
   display: "inline-block"

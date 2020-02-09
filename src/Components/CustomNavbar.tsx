@@ -8,7 +8,7 @@ export default class CustomNavbar extends Component {
   render() {
     return (
       <div>
-  <Navbar bg="dark" variant="dark" expand="lg">
+  <Navbar bg="dark" expand="lg" style={{backgroundColor: "#311847!important"}}>
   <Navbar.Brand href="#home">
   <img
         src={logo}
@@ -17,28 +17,26 @@ export default class CustomNavbar extends Component {
         className="d-inline-block align-top"
         alt="React Bootstrap logo"
       />
-    <h1 className="d-inline-block ml-3"> Paperclip </h1>
+    <h1 className="d-inline-block ml-3 text-white"> <Link to='/' style={{color: "white"}}>Paperclip</Link> </h1>
   
   </Navbar.Brand>
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
-      <Nav.Link href="#home">Home</Nav.Link>
-      <Nav.Link href="#link">Link</Nav.Link>
     </Nav>
 
 
     <Dropdown>
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
+      <Dropdown.Toggle id="dropdown-basic" style={{backgroundColor: "transparent", borderColor: "#E87F1C"}}>
         {(auth().currentUser?.displayName != null) ? auth().currentUser?.displayName : auth().currentUser?.email}
       </Dropdown.Toggle>
 
       <Dropdown.Menu className="dropdown-menu-right">
-        <Link to="/profile">View Profile</Link>
-        <br/>
-        <Link to='/settings'>Settings</Link>
-        <br/>
-        <Link onClick={() => {
+        <Link className="m-3" to="/profile">View Profile</Link>
+        <hr/>
+        <Link className="m-3" to='/settings'>Settings</Link>
+        <hr/>
+        <Link className="m-3" onClick={() => {
           auth().signOut();
         }} to="/login">Logout</Link>
         
