@@ -2,25 +2,25 @@ import React, { Component } from 'react';
 import CSS from 'csstype';
 import axios from 'axios';
 import {ButtonGroup, ToggleButton} from 'react-bootstrap';
-interface Props {}
+import { auth } from 'firebase';
+interface Props {
+  visible: boolean,
+  closeCreate: any
+}
 interface State {
     type: string
     request: string
     description: string
+    img: any
 }
 
-export default class Create extends Component {
+export default class Create extends Component<Props, State> {
 
     state = {
         type: "0",
         request: "",
         description: "",
-        img: null,
-        visible: false
-    }
-
-    handleChange = (e) => {
-        this.setState({[e.target.name]: e.target.value});
+        img: null
     }
 
     upload = (e) => {
@@ -33,14 +33,14 @@ export default class Create extends Component {
       reader.readAsDataURL(e.target.files[0]);
     }
         
-
     submit = (e) => {
         e.preventDefault();
         axios.post('http://redpaperclip.online/addRequest.php', {
             type: this.state.type,
             request: this.state.request,
             description: this.state.description,
-            img: this.state.img
+            img: this.state.img,
+            uid: auth().currentUser?.uid
           })
           .then(function (response) {
             console.log(response);
@@ -52,19 +52,19 @@ export default class Create extends Component {
 
   render() {
     return (
-      <div style={this.state.visible ? greyBg : {display: "none"}}>
-        <form onSubmit={this.submit} style={create}>
+      <div style={this.props.visible ? greyBg : {display: "none"}} onClick={this.props.closeCreate}>
+        <form onSubmit={this.submit} style={create} onClick={(e) => e.stopPropagation()}>
             <p style={label}> Short Name </p>
-            <input style={inputStyle} onChange={this.handleChange} name="request" placeholder="Enter Name Here"/>
+            <input style={inputStyle} onChange={(e) => this.setState({request: e.target.value})} name="request" placeholder="Enter Name Here"/>
             <br/>   
             <p style={label}>  Description </p>
-            <input style={inputStyle} onChange={this.handleChange} name="description" placeholder="Enter Short Description Here"/>
+            <input style={inputStyle} onChange={(e) => this.setState({description: e.target.value})} name="description" placeholder="Enter Short Description Here"/>
 
             <ButtonGroup toggle style={{margin: "16px"}}>
-            <ToggleButton checked={this.state.type === "0"} style={this.state.type === "0" ? customChecked : normal} type="radio" name="type" value='0' onChange={this.handleChange}>
+            <ToggleButton checked={this.state.type === "0"} style={this.state.type === "0" ? customChecked : normal} type="radio" name="type" value='0' onChange={(e) => this.setState({type: e.target.value})}>
               Want this item
             </ToggleButton>
-            <ToggleButton checked={this.state.type === "1"} style={this.state.type === "1" ? customChecked : normal} type="radio" name="type" value='1' onChange={this.handleChange}>
+            <ToggleButton checked={this.state.type === "1"} style={this.state.type === "1" ? customChecked : normal} type="radio" name="type" value='1' onChange={(e) => this.setState({type: e.target.value})}>
               Have this item
             </ToggleButton>
           </ButtonGroup>
@@ -95,6 +95,7 @@ const create : CSS.Properties = {
   position: "absolute",
   backgroundColor: "white",
   padding: "16px",
+  zIndex: 101
 
 }
 

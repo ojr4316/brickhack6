@@ -30,7 +30,7 @@ export default class CustomNavbar extends Component {
 
     <Dropdown>
       <Dropdown.Toggle variant="success" id="dropdown-basic">
-        Hi Owen
+        {auth().currentUser?.email}
       </Dropdown.Toggle>
 
       <Dropdown.Menu className="dropdown-menu-right">

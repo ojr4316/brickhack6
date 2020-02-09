@@ -51,8 +51,12 @@ export default class Home extends Component<Props, State> {
     });
   }
 
-  createPost = () => {
-      
+  toggleCreate = () => {
+    if (this.state.page > 0) {
+      this.setState({page: 0});
+    } else {
+      this.setState({page: 1});
+    }
   }
 
   render() {
@@ -71,12 +75,12 @@ export default class Home extends Component<Props, State> {
       <div style={body}>
         <Navbar />
        
-        <Create />
+        <Create visible={this.state.page === 1} closeCreate={this.toggleCreate}/>
         <div style={postStyle}> 
           {p}
         </div>
 
-        <div style={addButton} onClick={this.createPost}>
+        <div style={addButton} onClick={this.toggleCreate}>
           <p style={{color: "white", margin: "-8px", fontSize: "3em"}}> + </p>
         </div>
 
