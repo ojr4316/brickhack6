@@ -22,7 +22,6 @@ export default class LogIn extends Component<Props, State> {
         }
         firebase.auth().onAuthStateChanged((firebaseUser) => {
             if (firebaseUser) {
-                console.log(firebaseUser);
                 this.forceUpdate();
             } else {
                 console.log('not logged in');
@@ -32,7 +31,6 @@ export default class LogIn extends Component<Props, State> {
 
     handleEmail = (e) => {
         this.setState({"email": e.target.value});   
-        console.log(this.state.email); 
     }
 
     handlePass = (e) => {
@@ -61,9 +59,8 @@ export default class LogIn extends Component<Props, State> {
         );
     }
 
-    func = (event) => {
+    func = (event: any) => {
         event.preventDefault();
-        console.log(this.state.email, this.state.pass);
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.pass).catch(e => this.setState({"msg": e.message}));
     }
 }

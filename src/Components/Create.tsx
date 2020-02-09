@@ -10,7 +10,8 @@ interface State {
     wants: string
     request: string
     description: string
-    img: any
+    img: any,
+    location: string
 }
 
 export default class Create extends Component<Props, State> {
@@ -19,10 +20,11 @@ export default class Create extends Component<Props, State> {
         wants: "",
         request: "",
         description: "",
-        img: null
+        img: null,
+        location: ""
     }
 
-    upload = (e) => {
+    upload = (e : any) => {
       let reader = new FileReader();
       reader.onload = (event) => {
         if (event.target != null) {
@@ -39,7 +41,8 @@ export default class Create extends Component<Props, State> {
           request: this.state.request,
           description: this.state.description,
           img: this.state.img,
-          uid: auth().currentUser?.uid
+          uid: auth().currentUser?.uid,
+          location: this.state.location
         })
         .then((response) => {
           this.props.closeCreate();
@@ -62,6 +65,9 @@ export default class Create extends Component<Props, State> {
       
             <p style={label}> What I want </p>
             <input style={inputStyle} onChange={(e) => this.setState({wants: e.target.value})} name="wants" placeholder="Enter Wants Here"/>
+
+            <p style={label}> My Location </p>
+            <input style={inputStyle} onChange={(e) => this.setState({location: e.target.value})} name="location" placeholder="Enter Location Here"/>
 
             <br/>
             <input ref="imageUpload" name="img" type="file" accept="image/*" onChange={this.upload}/>

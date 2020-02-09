@@ -29,6 +29,8 @@ interface State {
 
 export default class Home extends Component<Props, State> {
 
+  isComponentMounted: boolean = false;
+
   state = {
     posts: [{
       wants: "",
@@ -46,6 +48,8 @@ export default class Home extends Component<Props, State> {
   componentDidMount() {
     let p : any = [];
 
+    this.isComponentMounted = true;
+
     axios.get('http://redpaperclip.online/getRequests.php').then((response) => {
       for (let i = 0; i < response.data.length; i++) {
         p.push({
@@ -58,8 +62,14 @@ export default class Home extends Component<Props, State> {
             userId: response.data[i].userId
           });
       }
-      this.setState({posts: p});
+      if (this.isComponentMounted) {
+        this.setState({posts: p});
+      }
     });
+  }
+
+  componentWillUnmount() {
+    this.isComponentMounted = false;
   }
 
   toggleCreate = () => {
@@ -79,7 +89,7 @@ export default class Home extends Component<Props, State> {
     let p : any = [];
 
     for (let i = 0; i < this.state.posts.length; i++) {
-      p.push(<Post selected={this.state.selected} setSelected={(i: number) => this.setState({selected: i})} uid={this.state.posts[i].userId} description={this.state.posts[i].description} id={this.state.posts[i].id} wants={this.state.posts[i].wants} title={this.state.posts[i].request} location={this.state.posts[i].location} img={this.state.posts[i].img}/>);
+      p.push(<Post key={i} selected={this.state.selected} setSelected={(i: number) => this.setState({selected: i})} uid={this.state.posts[i].userId} description={this.state.posts[i].description} id={this.state.posts[i].id} wants={this.state.posts[i].wants} title={this.state.posts[i].request} location={this.state.posts[i].location} img={this.state.posts[i].img}/>);
     }
 
     return (
