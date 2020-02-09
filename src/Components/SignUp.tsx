@@ -9,8 +9,6 @@ interface State {
 }
 
 interface Props {
-    user: any,
-    setUser: any
 }
 
 export default class SignUp extends Component<Props, State> {
@@ -25,7 +23,6 @@ export default class SignUp extends Component<Props, State> {
         firebase.auth().onAuthStateChanged((firebaseUser) => {
             if (firebaseUser) {
                 console.log(firebaseUser);
-                this.props.setUser(firebaseUser);
             } else {
                 console.log('not logged in');
             }
@@ -41,7 +38,7 @@ export default class SignUp extends Component<Props, State> {
     }
 
     render() {
-        if (this.props.user !== null) {
+        if (firebase.auth().currentUser !== null) {
             return <Redirect push to="/" />;
         }
 

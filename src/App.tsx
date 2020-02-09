@@ -6,16 +6,13 @@ import SignUp from './Components/SignUp';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import { User, initializeApp } from 'firebase';
 
-interface State {user: User | null;}
+interface State {}
 interface Props {}
 
 export default class App extends Component<Props, State> {
 
   constructor(props) {
     super(props);
-    this.state = {
-      user: null
-    }
     initializeApp(this.config);
   }
 
@@ -39,11 +36,11 @@ export default class App extends Component<Props, State> {
         <Router>
           <Switch>
             <Route path="/login">
-                <SignUp user={this.state.user} setUser={this.setUser} />
+                <SignUp />
               </Route>
 
             <Route path="/">
-              <Home user={this.state.user} setUser={this.setUser} />
+              <Home />
             </Route>
 
           </Switch>
