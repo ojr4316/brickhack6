@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Navbar, Nav, Dropdown} from 'react-bootstrap';
 import logo from '../img/icon.png';
 import {Link} from 'react-router-dom';
+import {auth} from 'firebase';
 
 export default class CustomNavbar extends Component {
   render() {
@@ -35,7 +36,7 @@ export default class CustomNavbar extends Component {
       <Dropdown.Menu className="dropdown-menu-right">
         <Dropdown.Item href="#/action-1">View Profile</Dropdown.Item>
         <Dropdown.Item href="#/action-2">Settings</Dropdown.Item>
-        <Dropdown.Item href="#/action-3"><Link to="/login">Logout</Link></Dropdown.Item>
+        <Dropdown.Item href="#/action-3" onClick={auth().signOut}><Link to="/login">Logout</Link></Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   </Navbar.Collapse>
