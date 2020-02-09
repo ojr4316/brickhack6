@@ -4,6 +4,8 @@ import CSS from 'csstype';
 import Post from './Post';
 import Navbar from './CustomNavbar';
 import Create from './Create';
+import Chat from './Chat';
+
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
 import firebase from 'firebase';
@@ -96,6 +98,8 @@ export default class Home extends Component<Props, State> {
       <div style={body}>
         <Navbar />
        
+        <Chat />
+
         <Create visible={this.state.page === 1} closeCreate={this.toggleCreate}/>
         <div style={postStyle}> 
           {p}

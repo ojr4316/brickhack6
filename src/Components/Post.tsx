@@ -34,18 +34,18 @@ export default class Post extends Component<Props, State> {
 
   startChat = () => {
     if (auth().currentUser?.uid !== this.props.uid) {
-      alert("clonked!");
       axios.post('http://redpaperclip.online/addChat.php', {
         uidFrom: auth().currentUser?.uid,
         uidTo: this.props.uid
       })
       .then((response) => {
+        console.log(response);
       })
       .catch(function (error) {
         console.log(error);
       });
-    };
     }
+  }
     
 
   render() {
