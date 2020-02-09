@@ -85,6 +85,15 @@ export default class Home extends Component<Props, State> {
     }
   }
 
+  toggleChat = () => {
+    if (this.state.page > 0) {
+      this.setState({page: 0});
+    } else {
+      this.setState({page: 2});
+    }
+  }
+
+
   render() {
 
     if (firebase.auth().currentUser === null) {
@@ -101,7 +110,7 @@ export default class Home extends Component<Props, State> {
       <div style={body}>
         <Navbar />
        
-        <Chat />
+        <Chat visible={this.state.page === 2}/>
 
         <Create visible={this.state.page === 1} closeCreate={this.toggleCreate}/>
         <div style={postStyle}> 
@@ -111,6 +120,11 @@ export default class Home extends Component<Props, State> {
         <div style={addButton} onClick={this.toggleCreate}>
           <p style={{color: "white", margin: "-8px", fontSize: "3em"}}> + </p>
         </div>
+
+        <div style={chatButton} onClick={this.toggleChat}>
+          <p style={{color: "white", margin: "-8px", fontSize: "3em"}}> C </p>
+        </div>
+
 
       </div>
     );
@@ -123,6 +137,20 @@ const addButton : CSS.Properties = {
   right: "16px",
   cursor: "pointer",
   backgroundColor: "#DE9151",
+  width: "64px",
+  height: "64px",
+  borderRadius: "100%",
+  textAlign: "center",
+  verticalAlign: "center",
+  display: "inline-block"
+}
+
+const chatButton : CSS.Properties = {
+  position: "absolute",
+  bottom: "16px",
+  left: "16px",
+  cursor: "pointer",
+  backgroundColor: "blue",
   width: "64px",
   height: "64px",
   borderRadius: "100%",

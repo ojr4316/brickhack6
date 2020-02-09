@@ -3,7 +3,10 @@ import CSS from "csstype";
 import axios from 'axios';
 import {auth} from 'firebase';
 
-interface Props {}
+interface Props {
+    visible: boolean
+}
+
 
 interface State {
     selectedChat: number,
@@ -22,7 +25,6 @@ export default class Chat extends Component<Props, State> {
     }
 
     componentDidMount() {
-
         axios.get('http://redpaperclip.online/getChats.php',{ params: {
             id: (auth().currentUser?.displayName === null ? auth().currentUser?.email : auth().currentUser?.displayName)
           }}).then((response) => {
@@ -72,13 +74,15 @@ export default class Chat extends Component<Props, State> {
       let chats : any = [];
       if (this.state.chats.length > 0) {
         for (let i = 0; i < this.state.chats.length; i++) {
-            chats.push(<div style={chatButton} onClick={() => this.setChat((this.state.chats[i] as any).chatId)}> <p> {(this.state.chats[i] as any).partner} </p></div>);
+            chats.push(<div key={i} style={chatButton} onClick={() => this.setChat((this.state.chats[i] as any).chatId)}> <p> {(this.state.chats[i] as any).partner} </p></div>);
         }
       }
       
     return (
-      <div>
+      <div style={{display: this.props.visible ? "initial" : "none", position: "absolute", bottom: 0, left: 0}}>
+          <div style={{overflowX: "scroll"}}> 
           {chats}
+          </div>
         <div style={chatArea} dangerouslySetInnerHTML={{__html: 
         this.state.chatHistory}}/>
         
