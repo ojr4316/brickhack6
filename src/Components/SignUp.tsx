@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 
 interface State {
     email: string;
@@ -42,7 +42,6 @@ export default class SignUp extends Component<Props, State> {
             return <Redirect push to="/" />;
         }
 
-
         return (
             <div>
                 <form onSubmit={this.func}>
@@ -52,9 +51,9 @@ export default class SignUp extends Component<Props, State> {
                     <br/> 
                     <input type="password" placeholder="Password" name="pass" value={this.state.pass} onChange={this.handlePass}/>
                     <br/>
-                    <button>Sign Up</button>
+                    <input type="submit" placeholder="Sign Up"/>
                     <p>———— or ————</p>
-                    <button>Log In</button>
+                    <button><Link to="/login">Login</Link></button>
                 </form>
             </div>
         );

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CSS from 'csstype';
 import firebase from 'firebase';
+import {Link, Redirect} from 'react-router-dom';
 
 interface State {
     email: string;
@@ -18,10 +19,12 @@ export default class LogIn extends Component<Props, State> {
             pass: ""
         }
         firebase.auth().onAuthStateChanged((firebaseUser) => {
-            if (firebaseUser)
+            if (firebaseUser) {
                 console.log(firebaseUser);
-            else
+                this.forceUpdate();
+            } else {
                 console.log('not logged in');
+            }
         })
     }
 
@@ -35,6 +38,10 @@ export default class LogIn extends Component<Props, State> {
     }
 
     render() {
+        if (firebase.auth().currentUser !== null) {
+            return <Redirect push to="/" />;
+        }
+
         return (
             <div>
                 <form onSubmit={this.func}>
@@ -44,6 +51,8 @@ export default class LogIn extends Component<Props, State> {
                     <input type="password" placeholder="Password" name="pass" value={this.state.pass} onChange={this.handlePass}/>
                     <br/>
                     <button>Log In</button>
+                    <p>———— or ————</p>
+                    <button><Link to="/signup">Register</Link></button>
                 </form>
             </div>
         );

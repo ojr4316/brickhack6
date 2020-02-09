@@ -36,7 +36,10 @@ export default class CustomNavbar extends Component {
       <Dropdown.Menu className="dropdown-menu-right">
         <Dropdown.Item href="#/action-1">View Profile</Dropdown.Item>
         <Dropdown.Item href="#/action-2">Settings</Dropdown.Item>
-        <Dropdown.Item href="#/action-3" onClick={auth().signOut}><Link to="/login">Logout</Link></Dropdown.Item>
+        <Link onClick={() => {
+          auth().signOut();
+        }} to="/login">Logout</Link>
+        
       </Dropdown.Menu>
     </Dropdown>
   </Navbar.Collapse>

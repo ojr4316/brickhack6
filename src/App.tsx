@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Home from './Components/Home';
 import SignUp from './Components/SignUp';
+import LogIn from './Components/LogIn';
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import { User, initializeApp } from 'firebase';
@@ -35,8 +36,12 @@ export default class App extends Component<Props, State> {
     return (
         <Router>
           <Switch>
-            <Route path="/login">
+            <Route path="/signup">
                 <SignUp />
+              </Route>
+
+              <Route path="/login">
+                <LogIn />
               </Route>
 
             <Route path="/">
