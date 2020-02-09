@@ -3,6 +3,7 @@ import './App.css';
 import Home from './Components/Home';
 import SignUp from './Components/SignUp';
 import LogIn from './Components/LogIn';
+import Settings from './Components/Settings';
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import { User, initializeApp } from 'firebase';
@@ -46,6 +47,10 @@ export default class App extends Component<Props, State> {
 
             <Route path="/">
               <Home />
+            </Route>
+
+            <Route path="/settings">
+              <Settings />
             </Route>
 
           </Switch>
