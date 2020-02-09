@@ -5,6 +5,7 @@ import SignUp from './Components/SignUp';
 import LogIn from './Components/LogIn';
 import Settings from './Components/Settings';
 import Landing from './Components/Landing';
+import Profile from './Components/Profile';
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import { User, initializeApp } from 'firebase';
@@ -40,6 +41,10 @@ export default class App extends Component<Props, State> {
           <Switch>
             <Route path='/landing'>
               <Landing />
+            </Route>
+
+            <Route path='/profile'>
+              <Profile />
             </Route>
 
             <Route path="/signup">
