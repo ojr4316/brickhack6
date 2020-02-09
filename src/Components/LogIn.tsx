@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import CSS from 'csstype';
 import firebase from 'firebase';
 import {Link, Redirect} from 'react-router-dom';
 
