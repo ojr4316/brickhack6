@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {auth} from 'firebase';
+import { Redirect } from 'react-router';
 
 interface State {
     img: any;
@@ -40,6 +41,8 @@ export default class Settings extends Component {
       }
 
     render() {
+        if (auth().currentUser == null)
+        return <Redirect push to="/login" />
         return(
             <div>
                 <form onSubmit={this.submit}>
