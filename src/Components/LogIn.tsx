@@ -13,7 +13,7 @@ interface Props {}
 
 export default class LogIn extends Component<Props, State> {
     
-    constructor(props){
+    constructor(props: any){
         super(props);
         this.state = {
             email: "",
