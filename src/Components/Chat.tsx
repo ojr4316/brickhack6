@@ -15,7 +15,7 @@ interface State {
 export default class Chat extends Component<Props, State> {
 
     state = {
-        selectedChat: 0,
+        selectedChat: -1,
         message: "",
         chatHistory: "",
         chats: []
@@ -46,6 +46,7 @@ export default class Chat extends Component<Props, State> {
 
     sendMessage = (e: any) => {
         e.preventDefault();
+        if (this.state.selectedChat !== -1) {
         this.setState({message: ""});
         axios.post('http://redpaperclip.online/addChatMessage.php', {
             chatId: this.state.selectedChat,
@@ -58,7 +59,10 @@ export default class Chat extends Component<Props, State> {
           .catch(function (error) {
             console.log(error);
           });
+
+        } 
     }
+
 
     setChat = (val) => {
         this.setState({selectedChat: val});
