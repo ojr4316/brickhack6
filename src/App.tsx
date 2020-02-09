@@ -53,8 +53,6 @@ export default class App extends Component<Props, State> {
               <Home />
             </Route>
 
-            
-
           </Switch>
         </Router>
     );

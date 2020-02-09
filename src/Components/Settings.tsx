@@ -14,9 +14,9 @@ interface Props {}
 export default class Settings extends Component {
 
     state = {
-        img: null,
-        name: null,
-        phone: null,
+        img: auth().currentUser?.photoURL,
+        name: auth().currentUser?.displayName,
+        phone: auth().currentUser?.phoneNumber,
         loc: null
     }
     
@@ -37,7 +37,7 @@ export default class Settings extends Component {
                 displayName: this.state.name,
                 photoURL: this.state.img
             });
-            user.phoneNumber = this.state.phone;
+            user.phoneNumber = this.state.phone != undefined ? this.state.phone : '';
         }
       }
 
@@ -49,13 +49,13 @@ export default class Settings extends Component {
                 <form onSubmit={this.submit}>
                     <input ref="imageUpload" name="img" type="file" accept="image/*" onChange={this.upload}/>
                     <br/>
-                    <input type="text" name="name" onChange={e => this.setState({"name": e.target.value})} placeholder="Display Name"/>
+                    <input type="text" name="name" onChange={e => this.setState({"name": e.target.value})} placeholder="Display Name" value={this.state.name != null ? this.state.name : ''}/>
                     <br/>
-                    <input type="number" name="phone" onChange={e => this.setState({"phone": e.target.value})} placeholder="Phone Number"/>
+                    <input type="number" name="phone" onChange={e => this.setState({"phone": e.target.value})} placeholder="Phone Number" value={this.state.phone != null ? this.state.phone : ''}/>
                     <br/>
                     <input type="text" name="loc" onChange={e => this.setState({"loc": e.target.value})} placeholder="Location"/>
                     <br/>
-                    <input type="submit"><Link to='/'>Save</Link></input>
+                    <button type="submit"><Link to='/'>Save</Link></button>
                 </form>
             </div>
         );
