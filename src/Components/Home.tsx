@@ -13,7 +13,9 @@ interface post {
   request: string,
   img: string,
   location: string,
-  id: number
+  id: number,
+  description: string,
+  userId: string
 }
 
 interface Props {
@@ -21,7 +23,8 @@ interface Props {
 
 interface State {
   posts: post[],
-  page: number
+  page: number,
+  selected: number
 }
 
 export default class Home extends Component<Props, State> {
@@ -32,9 +35,12 @@ export default class Home extends Component<Props, State> {
       request: "",
       img: "",
       location: "",
-      id: -1
+      id: -1,
+      description: "",
+      userId: ""
     }],
-    page: 0
+    page: 0,
+    selected: -1
   }
 
   componentDidMount() {
@@ -47,7 +53,9 @@ export default class Home extends Component<Props, State> {
             request: response.data[i].request,
             img: response.data[i].img,
             location: response.data[i].location,
-            id: response.data[i].id
+            id: response.data[i].id,
+            description: response.data[i].description,
+            userId: response.data[i].userId
           });
       }
       this.setState({posts: p});
@@ -71,7 +79,7 @@ export default class Home extends Component<Props, State> {
     let p : any = [];
 
     for (let i = 0; i < this.state.posts.length; i++) {
-      p.push(<Post id={this.state.posts[i].id} wants={this.state.posts[i].wants} title={this.state.posts[i].request} location={this.state.posts[i].location} img={this.state.posts[i].img}/>);
+      p.push(<Post selected={this.state.selected} setSelected={(i: number) => this.setState({selected: i})} uid={this.state.posts[i].userId} description={this.state.posts[i].description} id={this.state.posts[i].id} wants={this.state.posts[i].wants} title={this.state.posts[i].request} location={this.state.posts[i].location} img={this.state.posts[i].img}/>);
     }
 
     return (

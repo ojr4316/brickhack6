@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import '../App.css';
+import {auth} from 'firebase';
 import CSS from 'csstype';
 
 interface Props {
@@ -7,20 +8,42 @@ interface Props {
   location: string,
   img: string,
   wants: string,
-  id: number
+  id: number,
+  uid: string,
+  description: string,
+  selected: number,
+  setSelected: any
 }
 
 interface State {}
 
 export default class Post extends Component<Props, State> {
+
+  trySelect = () => {
+    if (this.props.selected === this.props.id) {
+      this.props.setSelected(-1);
+    } else {
+      this.props.setSelected(this.props.id);
+    }
+  }
+
   render() {
+    let isOwner:boolean = auth().currentUser?.uid === this.props.uid;
+    let extraStuff;
+    if (this.props.selected === this.props.id) {
+      extraStuff = <div><p style={grayText}>  I want <span style={brightText}> {this.props.wants} </span> </p><h5 style={{color: "grey"}}> Location </h5>
+      <p style={grayText}> {this.props.location} </p><h5 style={{color: "grey"}}>Description</h5><p> {this.props.description} </p>
+      <p> Trade ID: {this.props.id} </p> <button> {isOwner ? "Delete" : "Message" } </button> </div>;
+    }
+
+
     return (
-      <div style={post}>
+      <div className={this.props.selected === this.props.id ? "post-selected" : "post-normal"} style={post} onClick={this.trySelect}>
         <img style={imgStyle} alt="object pic" src={this.props.img}/>
         <p style={grayText}>  I have a <span style={brightText}> {this.props.title} </span> </p>
-        <p style={grayText}>  I want <span style={brightText}> {this.props.wants} </span> </p>
-        <p style={grayText}> {this.props.location} </p>
-        <p> {this.props.id} </p> 
+        
+        {extraStuff}
+        
       </div>
     );
   }
@@ -32,16 +55,17 @@ const post : CSS.Properties = {
   margin: "16px",
   padding: "16px",
   width: "300px",
-  height: "400px",
+  height: "300px",
   textAlign: "center",
-  boxShadow: "5px 5px 5px rgba(0, 0, 0, 0.3), 5px 5px 5px rgba(0, 0, 0, 0.3)"
+  boxShadow: "5px 5px 5px rgba(0, 0, 0, 0.3), 5px 5px 5px rgba(0, 0, 0, 0.3)",
+  backgroundColor: "white"
 }
 
 
 const imgStyle : CSS.Properties = {
-  width: "200px",
-  height: "200px",
-  objectFit: "cover"
+  width: "75%",
+  height: "50%",
+  objectFit: "contain"
 }
 
 const grayText = {

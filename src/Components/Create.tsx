@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import CSS from 'csstype';
 import axios from 'axios';
-import {ButtonGroup, ToggleButton} from 'react-bootstrap';
 import { auth } from 'firebase';
 interface Props {
   visible: boolean,
@@ -75,7 +74,7 @@ export default class Create extends Component<Props, State> {
 }
 
 const greyBg : CSS.Properties = {
-  position: "absolute",
+  position: "fixed",
   top: 0,
   left: 0,
   backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -104,15 +103,4 @@ const label : CSS.Properties = {
   fontSize: "1.25em",
   padding: 0,
   margin: 0
-}
-
-const customChecked : CSS.Properties = {
-  border: "none",
-  backgroundColor: "green",
-  boxShadow: "none"
-}
-
-const normal : CSS.Properties = {
-  border: "none",
-  boxShadow: "none"
 }
