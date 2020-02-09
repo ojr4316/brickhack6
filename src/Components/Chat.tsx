@@ -5,7 +5,8 @@ import {auth} from 'firebase';
 import Fade from 'react-reveal/Fade';
 
 interface Props {
-    visible: boolean
+    visible: boolean,
+    closeChat: any
 }
 
 interface State {
@@ -81,6 +82,7 @@ export default class Chat extends Component<Props, State> {
     return (
       <Fade bottom>
       <div style={{display: this.props.visible ? "initial" : "none", position: "absolute", bottom: 0, left: 0}}>
+        <div className="close" onClick={this.props.closeChat}>X</div>
           <div style={{overflowX: "scroll"}}> 
           {chats}
           </div>

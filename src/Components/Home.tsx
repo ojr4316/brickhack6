@@ -110,7 +110,7 @@ export default class Home extends Component<Props, State> {
       <div style={body}>
         <Navbar />
        
-        <Chat visible={this.state.page === 2}/>
+        <Chat closeChat={this.toggleChat} visible={this.state.page === 2}/>
 
         <Create visible={this.state.page === 1} closeCreate={this.toggleCreate}/>
         <div style={postStyle}> 
@@ -121,7 +121,7 @@ export default class Home extends Component<Props, State> {
           <p style={{color: "white", margin: "-8px", fontSize: "3em"}}> + </p>
         </div>
 
-        <div style={chatButton} onClick={this.toggleChat}>
+        <div onClick={this.toggleChat} style={{...chatButton, ...{ display: (this.state.page === 2 ? "none" : "initial") } }}>
           <p style={{color: "white", margin: "-8px", fontSize: "3em"}}> C </p>
         </div>
 
