@@ -6,6 +6,7 @@ import Navbar from './CustomNavbar';
 import Create from './Create';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
+import firebase from 'firebase';
 
 interface post {
   type: number,
@@ -15,8 +16,6 @@ interface post {
 }
 
 interface Props {
-  user: any,
-  setUser: any
 }
 
 interface State {
@@ -58,7 +57,7 @@ export default class Home extends Component<Props, State> {
 
   render() {
 
-    if (this.props.user === null) {
+    if (firebase.auth().currentUser === null) {
       return <Redirect push to="/login" />;
     }
 
