@@ -51,8 +51,8 @@ export default class Create extends Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.submit}>
+      <div style={greyBg}>
+        <form onSubmit={this.submit} style={create}>
             <p> Short Name </p>
             <input onChange={this.handleChange} name="request" placeholder="Enter Name Here"/>
             <br/>   
@@ -71,4 +71,11 @@ export default class Create extends Component {
       </div>
     );
   }
+}
+
+const greyBg : CSS.Properties = {
+  color: "rgba(0, 0, 0, 0.8)",
+  zIndex: -100,
+  width: "100vw",
+  height: "100vh"
 }
