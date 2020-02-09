@@ -50,13 +50,13 @@ export default class SignIn extends Component<Props, State> {
     render() {
         return (
             <div>
-                <form>
+                <form onSubmit={this.func}>
                     <h1>Sign Up</h1>
                     <input type="text" placeholder="E-mail" value={this.state.email} name="email" onChange={this.handleEmail}/>
                     <br/> 
                     <input type="password" placeholder="Password" name="pass" value={this.state.pass} onChange={this.handlePass}/>
                     <br/>
-                    <button onClick={this.func} >Sign Up</button>
+                    <button>Sign Up</button>
                     <p>———— or ————</p>
                     <button>Log In</button>
                 </form>
@@ -64,7 +64,8 @@ export default class SignIn extends Component<Props, State> {
         );
     }
 
-    func = () => {
+    func = (event) => {
+        event.preventDefault();
         console.log(this.state.email, this.state.pass);
         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.pass).catch(e => console.log(e.message));
     }
