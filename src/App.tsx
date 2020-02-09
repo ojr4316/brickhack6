@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import CSS from 'csstype';
 import Post from './Components/Post';
-import Navbar from './Components/Navbar';
+import Navbar from './Components/CustomNavbar';
 import Create from './Components/Create';
 import axios from 'axios';
 
@@ -44,8 +44,10 @@ export default class App extends Component {
       }
       this.setState({posts: p});
     });
+  }
 
-    
+  createPost = () => {
+
   }
 
   render() {
@@ -63,9 +65,28 @@ export default class App extends Component {
         <div style={postStyle}> 
           {p}
         </div>
+
+        <div style={addButton} onClick={this.createPost}>
+          <p style={{color: "white", margin: "-8px", fontSize: "3em"}}> + </p>
+        </div>
+
       </div>
     );
   }
+}
+
+const addButton : CSS.Properties = {
+  position: "absolute",
+  bottom: "16px",
+  right: "16px",
+  cursor: "pointer",
+  backgroundColor: "#DE9151",
+  width: "64px",
+  height: "64px",
+  borderRadius: "100%",
+  textAlign: "center",
+  verticalAlign: "center",
+  display: "inline-block"
 }
 
 const postStyle : CSS.Properties = {
