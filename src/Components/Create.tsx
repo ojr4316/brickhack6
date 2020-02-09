@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CSS from 'csstype';
 import axios from 'axios';
+import {ButtonGroup, ToggleButton} from 'react-bootstrap';
 
 interface Props {}
 interface State {
@@ -53,16 +54,20 @@ export default class Create extends Component {
     return (
       <div style={greyBg}>
         <form onSubmit={this.submit} style={create}>
-            <p> Short Name </p>
-            <input onChange={this.handleChange} name="request" placeholder="Enter Name Here"/>
+            <p style={label}> Short Name </p>
+            <input style={inputStyle} onChange={this.handleChange} name="request" placeholder="Enter Name Here"/>
             <br/>   
-            <p> Description </p>
-            <input onChange={this.handleChange} name="description" placeholder="Enter Short Description Here"/>
+            <p style={label}>  Description </p>
+            <input style={inputStyle} onChange={this.handleChange} name="description" placeholder="Enter Short Description Here"/>
 
-            <p> I want this item </p>
-            <input onChange={this.handleChange} type="radio" name="type" value="0"/>
-            <p> I have this item </p>
-            <input onChange={this.handleChange} type="radio" name="type" value="1"/>
+            <ButtonGroup toggle style={{margin: "16px"}}>
+            <ToggleButton type="radio" name="type" defaultChecked value="0">
+              Want this item
+            </ToggleButton>
+            <ToggleButton type="radio" name="type" value="1">
+              Have this item
+            </ToggleButton>
+          </ButtonGroup>
             <br/>
             <input ref="imageUpload" name="img" type="file" accept="image/*" onChange={this.upload}/>
             <input type="submit" value="Add"/>
@@ -74,8 +79,32 @@ export default class Create extends Component {
 }
 
 const greyBg : CSS.Properties = {
-  color: "rgba(0, 0, 0, 0.8)",
-  zIndex: -100,
+  position: "absolute",
+  top: 0,
+  left: 0,
+  backgroundColor: "rgba(0, 0, 0, 0.5)",
+  zIndex: 100,
   width: "100vw",
-  height: "100vh"
+  height: "100vh",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center"
+}
+
+const create : CSS.Properties = {
+  position: "absolute",
+  backgroundColor: "white",
+  padding: "16px",
+
+}
+
+const inputStyle : CSS.Properties = {
+  width: "100%",
+  fontSize: "1.25em"
+}
+
+const label : CSS.Properties = {
+  fontSize: "1.25em",
+  padding: 0,
+  margin: 0
 }
