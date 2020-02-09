@@ -9,10 +9,11 @@ import {Redirect} from 'react-router-dom';
 import firebase from 'firebase';
 
 interface post {
-  type: number,
+  wants: string,
   request: string,
   img: string,
-  location: string
+  location: string,
+  id: number
 }
 
 interface Props {
@@ -27,10 +28,11 @@ export default class Home extends Component<Props, State> {
 
   state = {
     posts: [{
-      type: -1,
+      wants: "",
       request: "",
       img: "",
-      location: ""
+      location: "",
+      id: -1
     }],
     page: 0
   }
@@ -41,10 +43,11 @@ export default class Home extends Component<Props, State> {
     axios.get('http://redpaperclip.online/getRequests.php').then((response) => {
       for (let i = 0; i < response.data.length; i++) {
         p.push({
-            type: response.data[i].type, 
+            wants: response.data[i].wants, 
             request: response.data[i].request,
             img: response.data[i].img,
-            location: response.data[i].location
+            location: response.data[i].location,
+            id: response.data[i].id
           });
       }
       this.setState({posts: p});
@@ -68,7 +71,7 @@ export default class Home extends Component<Props, State> {
     let p : any = [];
 
     for (let i = 0; i < this.state.posts.length; i++) {
-      p.push(<Post type={this.state.posts[i].type.toString()} title={this.state.posts[i].request} location={this.state.posts[i].location} img={this.state.posts[i].img}/>);
+      p.push(<Post id={this.state.posts[i].id} wants={this.state.posts[i].wants} title={this.state.posts[i].request} location={this.state.posts[i].location} img={this.state.posts[i].img}/>);
     }
 
     return (

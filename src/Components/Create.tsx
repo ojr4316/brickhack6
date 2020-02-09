@@ -8,7 +8,7 @@ interface Props {
   closeCreate: any
 }
 interface State {
-    type: string
+    wants: string
     request: string
     description: string
     img: any
@@ -17,7 +17,7 @@ interface State {
 export default class Create extends Component<Props, State> {
 
     state = {
-        type: "0",
+        wants: "",
         request: "",
         description: "",
         img: null
@@ -36,7 +36,7 @@ export default class Create extends Component<Props, State> {
     submit = (e) => {
         e.preventDefault();
         axios.post('http://redpaperclip.online/addRequest.php', {
-            type: this.state.type,
+            wants: this.state.wants,
             request: this.state.request,
             description: this.state.description,
             img: this.state.img,
@@ -59,15 +59,10 @@ export default class Create extends Component<Props, State> {
             <br/>   
             <p style={label}>  Description </p>
             <input style={inputStyle} onChange={(e) => this.setState({description: e.target.value})} name="description" placeholder="Enter Short Description Here"/>
+      
+            <p style={label}> What I want </p>
+            <input style={inputStyle} onChange={(e) => this.setState({wants: e.target.value})} name="wants" placeholder="Enter Wants Here"/>
 
-            <ButtonGroup toggle style={{margin: "16px"}}>
-            <ToggleButton checked={this.state.type === "0"} style={this.state.type === "0" ? customChecked : normal} type="radio" name="type" value='0' onChange={(e) => this.setState({type: e.target.value})}>
-              Want this item
-            </ToggleButton>
-            <ToggleButton checked={this.state.type === "1"} style={this.state.type === "1" ? customChecked : normal} type="radio" name="type" value='1' onChange={(e) => this.setState({type: e.target.value})}>
-              Have this item
-            </ToggleButton>
-          </ButtonGroup>
             <br/>
             <input ref="imageUpload" name="img" type="file" accept="image/*" onChange={this.upload}/>
             <input type="submit" value="Add"/>
