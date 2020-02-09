@@ -2,11 +2,11 @@ import React, { Component, CSSProperties } from 'react';
 import CSS from "csstype";
 import axios from 'axios';
 import {auth} from 'firebase';
+import Fade from 'react-reveal/Fade';
 
 interface Props {
     visible: boolean
 }
-
 
 interface State {
     selectedChat: number,
@@ -79,6 +79,7 @@ export default class Chat extends Component<Props, State> {
       }
       
     return (
+      <Fade bottom>
       <div style={{display: this.props.visible ? "initial" : "none", position: "absolute", bottom: 0, left: 0}}>
           <div style={{overflowX: "scroll"}}> 
           {chats}
@@ -92,6 +93,7 @@ export default class Chat extends Component<Props, State> {
         </form>
 
       </div>
+      </Fade>
     );
   }
 }

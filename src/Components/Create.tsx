@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CSS from 'csstype';
 import axios from 'axios';
 import { auth } from 'firebase';
+import Fade from 'react-reveal/Fade';
 interface Props {
   visible: boolean,
   closeCreate: any
@@ -57,24 +58,28 @@ export default class Create extends Component<Props, State> {
   render() {
     return (
       <div style={this.props.visible ? greyBg : {display: "none"}} onClick={this.props.closeCreate}>
+        <Fade bottom>
         <form onSubmit={this.submit} style={create} onClick={(e) => e.stopPropagation()}>
-            <p style={label}> Short Name </p>
-            <input style={inputStyle} onChange={(e) => this.setState({request: e.target.value})} name="request" placeholder="Enter Name Here"/>
-            <br/>   
-            <p style={label}>  Description </p>
-            <input style={inputStyle} onChange={(e) => this.setState({description: e.target.value})} name="description" placeholder="Enter Short Description Here"/>
-      
-            <p style={label}> What I want </p>
-            <input style={inputStyle} onChange={(e) => this.setState({wants: e.target.value})} name="wants" placeholder="Enter Wants Here"/>
+            <div className="close" onClick={this.props.closeCreate}>X</div>
+            <h2> Create a Trade Offer </h2>
+            <hr />
+            <p style={label}> What do you have? </p>
+            <input style={inputStyle} className="mb-3" onChange={(e) => this.setState({request: e.target.value})} name="request" placeholder="Enter Name Here"/>
+              
+            <p style={label}>  How would you describe it? </p>
+            <input style={inputStyle} className="mb-3" onChange={(e) => this.setState({description: e.target.value})} name="description" placeholder="Enter Short Description Here"/>
 
-            <p style={label}> My Location </p>
-            <input style={inputStyle} onChange={(e) => this.setState({location: e.target.value})} name="location" placeholder="Enter Location Here"/>
+            <p style={label}> What do you want for it? </p>
+            <input style={inputStyle} className="mb-3" onChange={(e) => this.setState({wants: e.target.value})} name="wants" placeholder="Enter Wants Here"/>
 
-            <br/>
-            <input ref="imageUpload" name="img" type="file" accept="image/*" onChange={this.upload}/>
-            <input type="submit" value="Add"/>
+            <p style={label}> Around where are you? </p>
+            <input style={inputStyle} className="mb-3" onChange={(e) => this.setState({location: e.target.value})} name="location" placeholder="Enter Location Here"/>
+
+            <input ref="imageUpload" className="mb-3" name="img" type="file" accept="image/*" onChange={this.upload}/>
+            <input type="submit" value="Add To Paperclip"/>
 
         </form>
+        </Fade>
       </div>
     );
   }
@@ -97,7 +102,8 @@ const create : CSS.Properties = {
   position: "absolute",
   backgroundColor: "white",
   padding: "16px",
-  zIndex: 101
+  zIndex: 101,
+  margin: "16px"
 
 }
 
