@@ -30,7 +30,7 @@ export default class CustomNavbar extends Component {
 
     <Dropdown>
       <Dropdown.Toggle variant="success" id="dropdown-basic">
-        {auth().currentUser?.email}
+        {(auth().currentUser?.displayName != null) ? auth().currentUser?.displayName : auth().currentUser?.email}
       </Dropdown.Toggle>
 
       <Dropdown.Menu className="dropdown-menu-right">
