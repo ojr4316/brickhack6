@@ -12,9 +12,7 @@ export default class Landing extends Component {
                     <h1 style={h1} className="d-inline-block align-bottom">Paperclip</h1>
                 </div>
                 <h3 style={h2}>Reducing cash dependencies on a college campus near you</h3>
-                <form>
-                    <button style={button} type="submit" className="align-bottom"><Link to='/signup'>Continue</Link></button>
-                </form>
+                <button style={button} className="align-bottom"><Link to='/signup'>Continue</Link></button>
             </div>
         );
     }
