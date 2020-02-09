@@ -9,7 +9,7 @@ interface State {
 
 interface Props {}
 
-export default class SignIn extends Component<Props, State> {
+export default class LogIn extends Component<Props, State> {
 
     config = {
         apiKey: "AIzaSyAWOtVU3nXn-VRkJo3T9sQxnSrm0pO1Fgs",
@@ -51,13 +51,11 @@ export default class SignIn extends Component<Props, State> {
         return (
             <div>
                 <form onSubmit={this.func}>
-                    <h1>Sign Up</h1>
+                    <h1>Log In</h1>
                     <input type="text" placeholder="E-mail" value={this.state.email} name="email" onChange={this.handleEmail}/>
                     <br/> 
                     <input type="password" placeholder="Password" name="pass" value={this.state.pass} onChange={this.handlePass}/>
                     <br/>
-                    <button>Sign Up</button>
-                    <p>———— or ————</p>
                     <button>Log In</button>
                 </form>
             </div>
@@ -67,6 +65,6 @@ export default class SignIn extends Component<Props, State> {
     func = (event) => {
         event.preventDefault();
         console.log(this.state.email, this.state.pass);
-        firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.pass).catch(e => console.log(e.message));
+        firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.pass).catch(e => console.log(e.message));
     }
 }
