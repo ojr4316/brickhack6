@@ -4,15 +4,55 @@ import CSS from 'csstype';
 import Post from './Components/Post';
 import Navbar from './Components/Navbar';
 import Create from './Components/Create';
+import axios from 'axios';
+
+interface post {
+  type: number,
+  request: string,
+  img: string,
+  location: string
+}
+
+interface Props {}
+
+interface State {
+  posts: post[]
+}
 
 export default class App extends Component {
-  
+
+  state = {
+    posts: [{
+      type: -1,
+      request: "",
+      img: "",
+      location: ""
+    }]
+  }
+
+  componentDidMount() {
+    let p : any = [];
+
+    axios.get('http://redpaperclip.online/getRequests.php').then((response) => {
+      for (let i = 0; i < response.data.length; i++) {
+        p.push({
+            type: response.data[i].type, 
+            request: response.data[i].request,
+            img: response.data[i].img,
+            location: response.data[i].location
+          });
+      }
+      this.setState({posts: p});
+    });
+
+    
+  }
 
   render() {
-    let posts : any = [];
+    let p : any = [];
 
-    for (let i = 0; i < 10; i++) {
-      posts.push(<Post type="0" title="Calculator" location="Rochester NY" img="https://upload.wikimedia.org/wikipedia/commons/c/cf/Casio_calculator_JS-20WK_in_201901_002.jpg"/>);
+    for (let i = 0; i < this.state.posts.length; i++) {
+      p.push(<Post type={this.state.posts[i].type.toString()} title={this.state.posts[i].request} location={this.state.posts[i].location} img={this.state.posts[i].img}/>);
     }
 
     return (
@@ -21,7 +61,7 @@ export default class App extends Component {
        
         <Create />
         <div style={postStyle}> 
-          {posts}
+          {p}
         </div>
       </div>
     );
