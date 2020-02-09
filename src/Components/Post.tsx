@@ -35,9 +35,10 @@ const post : CSS.Properties = {
 }
 
 
-const imgStyle = {
+const imgStyle : CSS.Properties = {
   width: "200px",
-  height: "200px"
+  height: "200px",
+  objectFit: "cover"
 }
 
 const grayText = {

@@ -42,8 +42,8 @@ export default class Create extends Component<Props, State> {
             img: this.state.img,
             uid: auth().currentUser?.uid
           })
-          .then(function (response) {
-            console.log(response);
+          .then((response) => {
+            this.props.closeCreate();
           })
           .catch(function (error) {
             console.log(error);
