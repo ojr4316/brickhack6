@@ -9,7 +9,7 @@ interface State {
 
 interface Props {}
 
-export default class SignIn extends Component<Props, State> {
+export default class SignUp extends Component<Props, State> {
 
     config = {
         apiKey: "AIzaSyAWOtVU3nXn-VRkJo3T9sQxnSrm0pO1Fgs",
