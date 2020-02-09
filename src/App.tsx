@@ -16,7 +16,8 @@ interface post {
 interface Props {}
 
 interface State {
-  posts: post[]
+  posts: post[],
+  page: number
 }
 
 export default class App extends Component {
@@ -27,7 +28,8 @@ export default class App extends Component {
       request: "",
       img: "",
       location: ""
-    }]
+    }],
+    page: 0
   }
 
   componentDidMount() {
@@ -47,7 +49,7 @@ export default class App extends Component {
   }
 
   createPost = () => {
-
+      
   }
 
   render() {
