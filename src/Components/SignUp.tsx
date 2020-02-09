@@ -18,7 +18,7 @@ export default class SignUp extends Component<Props, State> {
         this.state = {
             email: "",
             pass: "",
-            msg: ""
+            msg: "Please enter your email and a password"
         }
         firebase.auth().onAuthStateChanged((firebaseUser) => {
             if (firebaseUser) {
@@ -45,8 +45,8 @@ export default class SignUp extends Component<Props, State> {
         return (
             <div>
                 <form onSubmit={this.func}>
-                    <p style={{height: "1em"}}>{this.state.msg}</p>
                     <h1>Sign Up</h1>
+                    <p style={{height: "1em"}}>{this.state.msg}</p>
                     <input type="text" placeholder="E-mail" value={this.state.email} name="email" onChange={this.handleEmail}/>
                     <br/> 
                     <input type="password" placeholder="Password" name="pass" value={this.state.pass} onChange={this.handlePass}/>

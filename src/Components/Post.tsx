@@ -16,7 +16,7 @@ export default class Post extends Component<Props, State> {
     return (
       <div style={post}>
         <img style={imgStyle} alt="object pic" src={this.props.img}/>
-        <p style={grayText}>  I {this.props.type} a <span style={brightText}> {this.props.title} </span> </p>
+        <p style={grayText}>  I {(this.props.type == "0") ? 'want' : 'have'} a <span style={brightText}> {this.props.title} </span> </p>
         <p style={grayText}> {this.props.location} </p>
       </div>
     );
