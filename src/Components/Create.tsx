@@ -34,20 +34,21 @@ export default class Create extends Component<Props, State> {
     }
         
     submit = (e) => {
-        e.preventDefault();
-        axios.post('http://redpaperclip.online/addRequest.php', {
-            type: this.state.type,
-            request: this.state.request,
-            description: this.state.description,
-            img: this.state.img,
-            uid: auth().currentUser?.uid
-          })
-          .then((response) => {
-            this.props.closeCreate();
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+      e.preventDefault();
+      axios.post('http://redpaperclip.online/addRequest.php', {
+          type: this.state.type,
+          request: this.state.request,
+          description: this.state.description,
+          img: this.state.img,
+          uid: auth().currentUser?.uid
+        })
+        .then((response) => {
+          this.props.closeCreate();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      window.location.reload(false);
     }
 
   render() {
