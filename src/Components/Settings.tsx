@@ -7,7 +7,6 @@ interface State {
     img: any;
     name: string;
     phone: string;
-    loc: string;
 }
 interface Props {}
 
@@ -16,14 +15,13 @@ export default class Settings extends Component {
     state = {
         img: auth().currentUser?.photoURL,
         name: auth().currentUser?.displayName,
-        phone: auth().currentUser?.phoneNumber,
-        loc: null
+        phone: auth().currentUser?.phoneNumber
     }
     
     upload = (e) => {
         let reader = new FileReader();
         reader.onload = (event) => {
-          if (event.target != null) {
+          if (event.target !== null) {
             this.setState({img: event.target.result});
           }
         };
@@ -37,23 +35,21 @@ export default class Settings extends Component {
                 displayName: this.state.name,
                 photoURL: this.state.img
             });
-            user.phoneNumber = this.state.phone != undefined ? this.state.phone : '';
+            user.phoneNumber = this.state.phone !== undefined ? this.state.phone : '';
         }
       }
 
     render() {
-        if (auth().currentUser == null)
+        if (auth().currentUser === null)
         return <Redirect push to="/login" />
         return(
             <div>
                 <form onSubmit={this.submit}>
                     <input ref="imageUpload" name="img" type="file" accept="image/*" onChange={this.upload}/>
                     <br/>
-                    <input type="text" name="name" onChange={e => this.setState({"name": e.target.value})} placeholder="Display Name" value={this.state.name != null ? this.state.name : ''}/>
+                    <input type="text" name="name" onChange={e => this.setState({"name": e.target.value})} placeholder="Display Name" value={this.state.name !== null ? this.state.name : ''}/>
                     <br/>
-                    <input type="number" name="phone" onChange={e => this.setState({"phone": e.target.value})} placeholder="Phone Number" value={this.state.phone != null ? this.state.phone : ''}/>
-                    <br/>
-                    <input type="text" name="loc" onChange={e => this.setState({"loc": e.target.value})} placeholder="Location"/>
+                    <input type="number" name="phone" onChange={e => this.setState({"phone": e.target.value})} placeholder="Phone Number" value={this.state.phone !== null ? this.state.phone : ''}/>
                     <br/>
                     <button type="submit"><Link to='/'>Save</Link></button>
                 </form>
