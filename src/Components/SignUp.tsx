@@ -5,6 +5,7 @@ import {Redirect} from 'react-router-dom';
 interface State {
     email: string;
     pass: string;
+    msg: string;
 }
 
 interface Props {
@@ -14,25 +15,13 @@ interface Props {
 
 export default class SignUp extends Component<Props, State> {
 
-    config = {
-        apiKey: "AIzaSyAWOtVU3nXn-VRkJo3T9sQxnSrm0pO1Fgs",
-        authDomain: "paperclip-c1642.firebaseapp.com",
-        databaseURL: "https://paperclip-c1642.firebaseio.com",
-        projectId: "paperclip-c1642",
-        storageBucket: "paperclip-c1642.appspot.com",
-        messagingSenderId: "570120231969",
-        appId: "1:570120231969:web:da93453502776106129760",
-        measurementId: "G-WRQ0DRJR5G"
-      };
-    
     constructor(props: Props){
         super(props);
         this.state = {
             email: "",
-            pass: ""
+            pass: "",
+            msg: ""
         }
-        firebase.initializeApp(this.config);
-        //const root = firebase.database().ref().child('react');
         firebase.auth().onAuthStateChanged((firebaseUser) => {
             if (firebaseUser) {
                 console.log(firebaseUser);
@@ -60,6 +49,7 @@ export default class SignUp extends Component<Props, State> {
         return (
             <div>
                 <form onSubmit={this.func}>
+                    <p style={{height: "1em"}}>{this.state.msg}</p>
                     <h1>Sign Up</h1>
                     <input type="text" placeholder="E-mail" value={this.state.email} name="email" onChange={this.handleEmail}/>
                     <br/> 
@@ -74,8 +64,12 @@ export default class SignUp extends Component<Props, State> {
     }
 
     func = (event) => {
+        var m = "";
         event.preventDefault();
         console.log(this.state.email, this.state.pass);
-        firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.pass).catch(e => console.log(e.message));
+        firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.pass).catch(function(e) {
+            m = e.message;
+        });
+        this.setState({"msg": m});
     }
 }
