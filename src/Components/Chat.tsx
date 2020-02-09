@@ -99,7 +99,10 @@ const chatSubmit : CSS.Properties = {
 const chatArea : CSS.Properties = {
     height: "50vh",
     width: "25vw",
-    backgroundColor: "white"
+    backgroundColor: "white",
+    overflowY: "scroll",
+    overflowX: "hidden",
+    overflowWrap: "normal"
 };
 
 const chatButton : CSS.Properties = {
