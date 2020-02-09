@@ -45,13 +45,15 @@ export default class App extends Component<Props, State> {
                 <LogIn />
               </Route>
 
-            <Route path="/">
-              <Home />
-            </Route>
-
             <Route path="/settings">
               <Settings />
             </Route>
+
+            <Route exact path="/">
+              <Home />
+            </Route>
+
+            
 
           </Switch>
         </Router>
