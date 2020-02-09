@@ -6,6 +6,7 @@ import {Link, Redirect} from 'react-router-dom';
 interface State {
     email: string;
     pass: string;
+    msg: string;
 }
 
 interface Props {}
@@ -16,7 +17,8 @@ export default class LogIn extends Component<Props, State> {
         super(props);
         this.state = {
             email: "",
-            pass: ""
+            pass: "",
+            msg: "Please enter your email and password"
         }
         firebase.auth().onAuthStateChanged((firebaseUser) => {
             if (firebaseUser) {
@@ -46,6 +48,7 @@ export default class LogIn extends Component<Props, State> {
             <div>
                 <form onSubmit={this.func}>
                     <h1>Log In</h1>
+                    <p style={{height: "1em", color: "red"}}>{this.state.msg}</p>
                     <input type="text" placeholder="E-mail" value={this.state.email} name="email" onChange={this.handleEmail}/>
                     <br/> 
                     <input type="password" placeholder="Password" name="pass" value={this.state.pass} onChange={this.handlePass}/>
@@ -61,6 +64,6 @@ export default class LogIn extends Component<Props, State> {
     func = (event) => {
         event.preventDefault();
         console.log(this.state.email, this.state.pass);
-        firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.pass).catch(e => console.log(e.message));
+        firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.pass).catch(e => this.setState({"msg": e.message}));
     }
 }
